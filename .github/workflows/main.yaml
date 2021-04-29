@@ -1,0 +1,9 @@
+name: Release application
+
+on:
+  push:
+
+env:
+  GKE_CLUSTER: dwk-cluster-2
+  GKE_ZONE: europe-central2-a
+  IMAGE: 

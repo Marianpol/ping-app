@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ping-dep
+  namespace: production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ping
+  template:
+    metadata:
+      labels:
+        app: ping
+    spec:
+      volumes:
+        - name: shared-directory
+          persistentVolumeClaim:
+            claimName: image-claim
+      containers:
+        - name: ping
+          image: gcr.io/dwk-gke-311121/ping:latest
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_HOST
+              value: "postgres-svc"
+            - name: POSTGRES_DB
+              value: "postgres"
+            - name: POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-db-password
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - name: shared-directory
+              mountPath: /usr/src/app/files
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "50m"
+          imagePullPolicy: Always
