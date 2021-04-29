@@ -9,6 +9,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster-2
   GKE_ZONE: europe-central2-a
+  IMAGE: ping
 
 jobs:
   build-publish-deploy:
