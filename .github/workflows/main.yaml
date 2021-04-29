@@ -10,6 +10,8 @@ env:
   GKE_CLUSTER: dwk-cluster-2
   GKE_ZONE: europe-central2-a
   IMAGE: ping
+  DEPLOYMENT_NAME: ping-dep
+  NAMESPACE: production
 
 jobs:
   build-publish-deploy:
@@ -48,4 +50,4 @@ jobs:
           cd deploy
           ../kustomize edit set image PROJECT/IMAGE=$IMAGE_WITH_TAG
           kubectl apply -k .
-          kubectl rollout status deployment/ping-dep
+          kubectl rollout status deployment/$DEPLOYMENT_NAME -n $NAMESPACE
