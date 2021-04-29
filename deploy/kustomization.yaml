@@ -5,3 +5,5 @@ resources:
   - ./deployment.yaml
   - ./deployment-postgres.yaml
   - ./service.yaml
+images:
+  - name: PROJECT/IMAGE

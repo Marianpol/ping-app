@@ -19,7 +19,7 @@ spec:
             claimName: image-claim
       containers:
         - name: ping
-          image: gcr.io/dwk-gke-311121/ping:latest
+          image: PROJECT/IMAGE
           env:
             - name: POSTGRES_USER
               value: "postgres"
